@@ -74,18 +74,63 @@ def extract_video_id(url: str) -> str:
 def fmt_ts(s: float) -> str:
     return f"{int(s//3600):02d}:{int((s%3600)//60):02d}:{int(s%60):02d}"
 
+def get_transcript_ytdlp(video_id: str, lang: str):
+    """Fallback transcript extraction using yt-dlp"""
+    import tempfile, os
+    url = f"https://www.youtube.com/watch?v={video_id}"
+    with tempfile.TemporaryDirectory() as tmpdir:
+        ydl_opts = {
+            'writesubtitles': True,
+            'writeautomaticsub': True,
+            'subtitleslangs': [lang, 'en'],
+            'subtitlesformat': 'json3',
+            'skip_download': True,
+            'outtmpl': os.path.join(tmpdir, '%(id)s'),
+            'quiet': True,
+            'no_warnings': True,
+        }
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info = ydl.extract_info(url, download=True)
+        # Find subtitle file
+        for l in [lang, 'en']:
+            fpath = os.path.join(tmpdir, f"{video_id}.{l}.json3")
+            if os.path.exists(fpath):
+                with open(fpath) as f:
+                    raw = json.load(f)
+                entries = []
+                for ev in raw.get('events', []):
+                    segs = ev.get('segs', [])
+                    text = ''.join(s.get('utf8','') for s in segs).strip()
+                    if text and text != '\n':
+                        start = ev.get('tStartMs', 0) / 1000
+                        dur = ev.get('dDurationMs', 2000) / 1000
+                        entries.append({'text': text, 'start': start, 'duration': dur})
+                if entries:
+                    lname = info.get('subtitles', {}).get(l, [{}])[0].get('name', l) if info else l
+                    return entries, lname, l
+    raise HTTPException(status_code=404, detail="No subtitles found for this video.")
+
 def get_transcript_data(video_id: str, lang: str):
-    tlist = YouTubeTranscriptApi.list_transcripts(video_id)
-    t = None
-    try: t = tlist.find_transcript([lang])
-    except NoTranscriptFound:
+    try:
+        tlist = YouTubeTranscriptApi.list_transcripts(video_id)
+        t = None
+        try: t = tlist.find_transcript([lang])
+        except NoTranscriptFound:
+            try:
+                for x in tlist:
+                    if x.is_translatable: t = x.translate(lang); break
+            except: pass
+        if t is None: t = next(iter(tlist))
+        data = t.fetch()
+        return data, t.language, t.language_code
+    except Exception as e:
+        # Fallback to yt-dlp if YouTube blocks the request
         try:
-            for x in tlist:
-                if x.is_translatable: t = x.translate(lang); break
-        except: pass
-    if t is None: t = next(iter(tlist))
-    data = t.fetch()
-    return data, t.language, t.language_code
+            return get_transcript_ytdlp(video_id, lang)
+        except HTTPException:
+            raise
+        except Exception as e2:
+            raise HTTPException(status_code=500, detail=f"Transcript extraction failed: {str(e2)}")
 
 def parse_json_safe(text: str) -> dict:
     clean = text.strip().replace("```json","").replace("```","").strip()
