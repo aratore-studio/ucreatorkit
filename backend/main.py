@@ -1,10 +1,12 @@
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
-from youtube_transcript_api import (
-    YouTubeTranscriptApi, TranscriptsDisabled,
-    NoTranscriptFound, VideoUnavailable
-)
-from youtube_transcript_api.formatters import SRTFormatter, TextFormatter, WebVTTFormatter
+from youtube_transcript_api import YouTubeTranscriptApi
+try:
+    from youtube_transcript_api import TranscriptsDisabled, NoTranscriptFound, VideoUnavailable
+except ImportError:
+    TranscriptsDisabled = type('TranscriptsDisabled', (Exception,), {})
+    NoTranscriptFound = type('NoTranscriptFound', (Exception,), {})
+    VideoUnavailable = type('VideoUnavailable', (Exception,), {})
 from pydantic import BaseModel
 from typing import Optional
 import re, os, json, httpx
@@ -74,6 +76,31 @@ def extract_video_id(url: str) -> str:
 def fmt_ts(s: float) -> str:
     return f"{int(s//3600):02d}:{int((s%3600)//60):02d}:{int(s%60):02d}"
 
+def _ts_srt(s: float) -> str:
+    h, rem = divmod(s, 3600); m, sec = divmod(rem, 60)
+    return f"{int(h):02d}:{int(m):02d}:{int(sec):02d},{int((sec%1)*1000):03d}"
+
+def _ts_vtt(s: float) -> str:
+    h, rem = divmod(s, 3600); m, sec = divmod(rem, 60)
+    return f"{int(h):02d}:{int(m):02d}:{int(sec):02d}.{int((sec%1)*1000):03d}"
+
+def format_srt(entries):
+    lines = []
+    for i, e in enumerate(entries, 1):
+        s, d = e["start"], e["duration"]
+        lines.append(f"{i}\n{_ts_srt(s)} --> {_ts_srt(s+d)}\n{e['text']}")
+    return "\n\n".join(lines)
+
+def format_txt(entries):
+    return "\n".join(e["text"] for e in entries)
+
+def format_vtt(entries):
+    lines = ["WEBVTT\n"]
+    for e in entries:
+        s, d = e["start"], e["duration"]
+        lines.append(f"{_ts_vtt(s)} --> {_ts_vtt(s+d)}\n{e['text']}")
+    return "\n\n".join(lines)
+
 def get_transcript_ytdlp(video_id: str, lang: str):
     """Fallback transcript extraction using yt-dlp"""
     import tempfile, os
@@ -88,9 +115,18 @@ def get_transcript_ytdlp(video_id: str, lang: str):
             'outtmpl': os.path.join(tmpdir, '%(id)s'),
             'quiet': True,
             'no_warnings': True,
+            'extract_flat': False,
+            'format': 'worst',
+            'ignore_no_formats_error': True,
         }
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(url, download=True)
+        try:
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                info = ydl.extract_info(url, download=True)
+        except Exception:
+            # Retry without format option
+            ydl_opts.pop('format', None)
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                info = ydl.extract_info(url, download=True)
         # Find subtitle file
         for l in [lang, 'en']:
             fpath = os.path.join(tmpdir, f"{video_id}.{l}.json3")
@@ -112,7 +148,8 @@ def get_transcript_ytdlp(video_id: str, lang: str):
 
 def get_transcript_data(video_id: str, lang: str):
     try:
-        tlist = YouTubeTranscriptApi.list_transcripts(video_id)
+        ytt_api = YouTubeTranscriptApi()
+        tlist = ytt_api.list(video_id)
         t = None
         try: t = tlist.find_transcript([lang])
         except NoTranscriptFound:
@@ -121,8 +158,11 @@ def get_transcript_data(video_id: str, lang: str):
                     if x.is_translatable: t = x.translate(lang); break
             except: pass
         if t is None: t = next(iter(tlist))
-        data = t.fetch()
+        fetched = t.fetch()
+        data = fetched.to_raw_data()
         return data, t.language, t.language_code
+    except (TranscriptsDisabled, VideoUnavailable):
+        raise
     except Exception as e:
         # Fallback to yt-dlp if YouTube blocks the request
         try:
@@ -144,9 +184,9 @@ def get_transcript(url: str=Query(...), lang: str=Query("en"), format: str=Query
     except TranscriptsDisabled: raise HTTPException(404, "Subtitles are disabled for this video.")
     except VideoUnavailable:    raise HTTPException(404, "Video not found.")
     except Exception as e:      raise HTTPException(500, f"Transcript error: {e}")
-    if format == "srt": return {"format":"srt","content":SRTFormatter().format_transcript(data)}
-    if format == "txt": return {"format":"txt","content":TextFormatter().format_transcript(data)}
-    if format == "vtt": return {"format":"vtt","content":WebVTTFormatter().format_transcript(data)}
+    if format == "srt": return {"format":"srt","content":format_srt(data)}
+    if format == "txt": return {"format":"txt","content":format_txt(data)}
+    if format == "vtt": return {"format":"vtt","content":format_vtt(data)}
     return {"format":"json","video_id":vid,"language":lname,"language_code":lcode,"entry_count":len(data),
             "entries":[{"start":round(e["start"],2),"duration":round(e["duration"],2),
                         "text":e["text"],"timestamp":fmt_ts(e["start"])} for e in data]}
@@ -155,7 +195,8 @@ def get_transcript(url: str=Query(...), lang: str=Query("en"), format: str=Query
 def get_languages(url: str=Query(...)):
     vid = extract_video_id(url)
     try:
-        tlist = YouTubeTranscriptApi.list_transcripts(vid)
+        ytt_api = YouTubeTranscriptApi()
+        tlist = ytt_api.list(vid)
         langs = [{"code":t.language_code,"name":t.language,
                   "is_generated":t.is_generated,"is_translatable":t.is_translatable} for t in tlist]
         return {"video_id":vid,"total":len(langs),
