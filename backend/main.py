@@ -9,7 +9,7 @@ except ImportError:
     VideoUnavailable = type('VideoUnavailable', (Exception,), {})
 from pydantic import BaseModel
 from typing import Optional
-import re, os, json, httpx
+import re, os, json, httpx, time
 import yt_dlp
 
 app = FastAPI(title="UCreatorKit API v3", version="3.0.0")
@@ -147,30 +147,42 @@ def get_transcript_ytdlp(video_id: str, lang: str):
     raise HTTPException(status_code=404, detail="No subtitles found for this video.")
 
 def get_transcript_data(video_id: str, lang: str):
-    try:
-        ytt_api = YouTubeTranscriptApi()
-        tlist = ytt_api.list(video_id)
-        t = None
-        try: t = tlist.find_transcript([lang])
-        except NoTranscriptFound:
-            try:
-                for x in tlist:
-                    if x.is_translatable: t = x.translate(lang); break
-            except: pass
-        if t is None: t = next(iter(tlist))
-        fetched = t.fetch()
-        data = fetched.to_raw_data()
-        return data, t.language, t.language_code
-    except (TranscriptsDisabled, VideoUnavailable):
-        raise
-    except Exception as e:
-        # Fallback to yt-dlp if YouTube blocks the request
+    last_err = None
+    for attempt in range(3):
+        try:
+            ytt_api = YouTubeTranscriptApi()
+            tlist = ytt_api.list(video_id)
+            t = None
+            try: t = tlist.find_transcript([lang])
+            except NoTranscriptFound:
+                try:
+                    for x in tlist:
+                        if x.is_translatable: t = x.translate(lang); break
+                except: pass
+            if t is None: t = next(iter(tlist))
+            fetched = t.fetch()
+            data = fetched.to_raw_data()
+            return data, t.language, t.language_code
+        except (TranscriptsDisabled, VideoUnavailable):
+            raise
+        except Exception as e:
+            last_err = e
+            if "429" in str(e) and attempt < 2:
+                time.sleep(2 ** attempt)
+                continue
+            break
+    # Fallback to yt-dlp if youtube-transcript-api fails
+    for attempt in range(2):
         try:
             return get_transcript_ytdlp(video_id, lang)
         except HTTPException:
             raise
         except Exception as e2:
-            raise HTTPException(status_code=500, detail=f"Transcript extraction failed: {str(e2)}")
+            last_err = e2
+            if "429" in str(e2) and attempt < 1:
+                time.sleep(2)
+                continue
+    raise HTTPException(status_code=500, detail=f"Transcript extraction failed: {str(last_err)}")
 
 def parse_json_safe(text: str) -> dict:
     clean = text.strip().replace("```json","").replace("```","").strip()
