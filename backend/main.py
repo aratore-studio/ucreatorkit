@@ -148,6 +148,7 @@ def get_transcript_ytdlp(video_id: str, lang: str):
 
 def get_transcript_data(video_id: str, lang: str):
     last_err = None
+    # Step 1: Try youtube-transcript-api with requested language
     for attempt in range(3):
         try:
             ytt_api = YouTubeTranscriptApi()
@@ -171,7 +172,18 @@ def get_transcript_data(video_id: str, lang: str):
                 time.sleep(2 ** attempt)
                 continue
             break
-    # Fallback to yt-dlp if youtube-transcript-api fails
+    # Step 2: If 429, try getting ANY available transcript (skip translation)
+    if last_err and "429" in str(last_err):
+        try:
+            ytt_api = YouTubeTranscriptApi()
+            tlist = ytt_api.list(video_id)
+            t = next(iter(tlist))
+            fetched = t.fetch()
+            data = fetched.to_raw_data()
+            return data, t.language, t.language_code
+        except Exception:
+            pass
+    # Step 3: Fallback to yt-dlp
     for attempt in range(2):
         try:
             return get_transcript_ytdlp(video_id, lang)
@@ -182,6 +194,12 @@ def get_transcript_data(video_id: str, lang: str):
             if "429" in str(e2) and attempt < 1:
                 time.sleep(2)
                 continue
+    # Step 4: Last resort - yt-dlp with English
+    if lang != "en":
+        try:
+            return get_transcript_ytdlp(video_id, "en")
+        except Exception:
+            pass
     raise HTTPException(status_code=500, detail=f"Transcript extraction failed: {str(last_err)}")
 
 def parse_json_safe(text: str) -> dict:
