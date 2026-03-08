@@ -26,6 +26,52 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#080808">
 <title>UCreatorKit — Free YouTube Creator Tools</title>
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "UCreatorKit",
+  "url": "https://ucreatorkit.vercel.app",
+  "description": "Free all-in-one YouTube creator toolkit with 8 tools: subtitle extractor, AI video summary, thumbnail downloader, tag generator, title CTR analyzer, channel analytics, subtitle translator, and chapter generator. Supports 30 languages.",
+  "applicationCategory": "Multimedia",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "YouTube Subtitle Extraction (SRT, TXT, VTT)",
+    "AI-Powered Video Summary",
+    "Thumbnail Download in Multiple Resolutions",
+    "SEO Tag Generation",
+    "Title CTR Analysis with AI Suggestions",
+    "Channel Analytics and Statistics",
+    "Subtitle Translation in 30 Languages",
+    "AI Chapter Timestamp Generation"
+  ],
+  "inLanguage": ["en","ko","ja","zh","es","fr","de","pt","ru","ar","hi","it","nl","pl","tr","id","ms","th","vi","sv","da","fi","no","cs","ro","hu","uk","fa"],
+  "creator": {
+    "@type": "Organization",
+    "name": "UCreatorKit",
+    "url": "https://ucreatorkit.vercel.app"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Is UCreatorKit free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, all 8 tools are completely free with no registration, subscription, or hidden costs."}},
+    {"@type": "Question", "name": "Do I need to create an account?", "acceptedAnswer": {"@type": "Answer", "text": "No account is needed. Just paste a YouTube URL and start using any tool immediately."}},
+    {"@type": "Question", "name": "How many languages are supported?", "acceptedAnswer": {"@type": "Answer", "text": "UCreatorKit supports 30 languages for subtitle extraction and translation, including English, Korean, Japanese, Chinese, Spanish, French, German, and more."}},
+    {"@type": "Question", "name": "What subtitle formats can I download?", "acceptedAnswer": {"@type": "Answer", "text": "You can download subtitles in TXT (plain text), SRT (SubRip), and VTT (WebVTT) formats."}},
+    {"@type": "Question", "name": "Is my data safe?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. UCreatorKit does not store your data. YouTube URLs are processed in real-time and not saved after the response is sent."}}
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -290,8 +336,9 @@ const I18N = {
 };
 </script>
 
-<nav>
-  <div class="logo">U<span>Creator</span>Kit</div>
+<a href="#workshop" class="skip-link" style="position:absolute;top:-100%;left:16px;background:var(--red);color:#fff;padding:8px 16px;z-index:999;font-size:.8rem;border-radius:var(--r);transition:top .2s" onfocus="this.style.top='8px'" onblur="this.style.top='-100%'">Skip to content</a>
+<nav role="navigation" aria-label="Main navigation">
+  <div class="logo" role="banner">U<span>Creator</span>Kit</div>
   <ul class="nav-links">
     <li><a href="#tools" data-i18n="nav.tools">Tools</a></li>
     <li><a href="#workshop" data-i18n="nav.workshop">Workshop</a></li>
@@ -299,8 +346,8 @@ const I18N = {
   </ul>
   <div class="nav-right">
     <div class="lsw">
-      <button class="lsw-btn" onclick="toggleDD()">
-        <span id="lsw-flag">🇺🇸</span><span id="lsw-label">EN</span><span style="font-size:.6rem;opacity:.5">▾</span>
+      <button class="lsw-btn" onclick="toggleDD()" aria-label="Change language" aria-expanded="false" aria-haspopup="listbox">
+        <span id="lsw-flag">🇺🇸</span><span id="lsw-label">EN</span><span style="font-size:.6rem;opacity:.5" aria-hidden="true">▾</span>
       </button>
       <div class="lsw-drop" id="lsw-drop">
         <button class="lsw-opt active" onclick="setUILang('en')"><span>🇺🇸</span>English</button>
@@ -317,6 +364,7 @@ const I18N = {
   </div>
 </nav>
 
+<main>
 <section class="hero">
   <div class="hero-grid"></div>
   <div class="hero-l">
@@ -344,7 +392,9 @@ const I18N = {
 
 <div class="marquee"><div class="marquee-inner" id="mq"></div></div>
 
+<!-- AdSense: uncomment when approved
 <div class="ad-wrap"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+-->
 
 <section class="section" id="tools">
   <div class="s-eye reveal"><div class="s-eye-line"></div><span data-i18n="s.tools">All Tools</span></div>
@@ -361,7 +411,9 @@ const I18N = {
   </div>
 </section>
 
+<!-- AdSense: uncomment when approved
 <div class="ad-wrap"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXXX" data-ad-slot="2222222222" data-ad-format="auto"></ins></div>
+-->
 
 <section class="section" id="workshop" style="padding-top:72px">
   <div class="s-eye reveal"><div class="s-eye-line"></div><span data-i18n="s.ws">Try It Now</span></div>
@@ -383,8 +435,8 @@ const I18N = {
         <div class="tp-title" data-i18n="tp.t">Subtitle Extractor</div>
         <div class="tp-sub" data-i18n="tp.t.sub">Paste a YouTube URL, pick language, and extract subtitles instantly.</div>
         <div class="input-row">
-          <input class="url-in" id="t-url" placeholder="https://www.youtube.com/watch?v=..." onkeydown="if(event.key==='Enter')runT()">
-          <button class="run-btn" id="t-btn" onclick="runT()"><div class="sp"></div><span class="bl" data-i18n="tp.t.btn">Extract</span></button>
+          <input class="url-in" id="t-url" placeholder="https://www.youtube.com/watch?v=..." onkeydown="if(event.key==='Enter')runT()" aria-label="YouTube video URL for subtitle extraction">
+          <button class="run-btn" id="t-btn" onclick="runT()" aria-label="Extract subtitles"><div class="sp" aria-hidden="true"></div><span class="bl" data-i18n="tp.t.btn">Extract</span></button>
         </div>
         <div class="lchips">
           <button class="lchip active" onclick="setLC(this,'en','t')" data-i18n="l.en">English</button>
@@ -411,8 +463,8 @@ const I18N = {
         <div class="tp-title" data-i18n="tp.s">AI Video Summary</div>
         <div class="tp-sub" data-i18n="tp.s.sub">AI reads the transcript and extracts the core summary, key points, and keywords. (~10 sec)</div>
         <div class="input-row">
-          <input class="url-in" id="s-url" placeholder="https://www.youtube.com/watch?v=..." onkeydown="if(event.key==='Enter')runS()">
-          <button class="run-btn" id="s-btn" onclick="runS()"><div class="sp"></div><span class="bl" data-i18n="tp.s.btn">Summarize</span></button>
+          <input class="url-in" id="s-url" placeholder="https://www.youtube.com/watch?v=..." onkeydown="if(event.key==='Enter')runS()" aria-label="YouTube video URL for AI summary">
+          <button class="run-btn" id="s-btn" onclick="runS()" aria-label="Generate AI summary"><div class="sp" aria-hidden="true"></div><span class="bl" data-i18n="tp.s.btn">Summarize</span></button>
         </div>
         <div class="lchips">
           <button class="lchip active" onclick="setLC(this,'en','s')" data-i18n="l.en">English subtitles</button>
@@ -429,8 +481,8 @@ const I18N = {
         <div class="tp-title" data-i18n="tp.th">Thumbnail Downloader</div>
         <div class="tp-sub" data-i18n="tp.th.sub">Preview and download thumbnails in all available resolutions.</div>
         <div class="input-row">
-          <input class="url-in" id="th-url" placeholder="https://www.youtube.com/watch?v=..." onkeydown="if(event.key==='Enter')runTH()">
-          <button class="run-btn" id="th-btn" onclick="runTH()"><div class="sp"></div><span class="bl" data-i18n="tp.th.btn">Load</span></button>
+          <input class="url-in" id="th-url" placeholder="https://www.youtube.com/watch?v=..." onkeydown="if(event.key==='Enter')runTH()" aria-label="YouTube video URL for thumbnail download">
+          <button class="run-btn" id="th-btn" onclick="runTH()" aria-label="Load thumbnails"><div class="sp" aria-hidden="true"></div><span class="bl" data-i18n="tp.th.btn">Load</span></button>
         </div>
         <div id="th-res"><div class="rbox"><span class="ph" data-i18n="tp.th.ph">← Paste a URL and click Load</span></div></div>
       </div>
@@ -445,12 +497,12 @@ const I18N = {
           <button class="lchip" id="tg-ext-btn2" onclick="setTM('ext')">🔍 Extract from URL</button>
         </div>
         <div id="tg-gen-wrap">
-          <input class="txt-in" id="tg-topic" placeholder="e.g. how to grow on YouTube, travel vlog Japan..." onkeydown="if(event.key==='Enter')runTag()">
-          <button class="solo-btn" id="tg-btn" onclick="runTag()"><div class="sp"></div><span class="bl">Generate Tags</span></button>
+          <input class="txt-in" id="tg-topic" placeholder="e.g. how to grow on YouTube, travel vlog Japan..." onkeydown="if(event.key==='Enter')runTag()" aria-label="Enter topic to generate SEO tags">
+          <button class="solo-btn" id="tg-btn" onclick="runTag()" aria-label="Generate tags"><div class="sp" aria-hidden="true"></div><span class="bl">Generate Tags</span></button>
         </div>
         <div id="tg-ext-wrap" style="display:none">
           <div class="input-row">
-            <input class="url-in" id="tg-url" placeholder="https://www.youtube.com/watch?v=..." onkeydown="if(event.key==='Enter')runTagExt()">
+            <input class="url-in" id="tg-url" placeholder="https://www.youtube.com/watch?v=..." onkeydown="if(event.key==='Enter')runTagExt()" aria-label="YouTube video URL to extract tags from">
             <button class="run-btn" id="tg-ext-btn" onclick="runTagExt()"><div class="sp"></div><span class="bl">Extract</span></button>
           </div>
         </div>
@@ -462,9 +514,9 @@ const I18N = {
       <div class="tool-panel">
         <div class="tp-title">Title CTR Analyzer</div>
         <div class="tp-sub">Score your title's click-through rate potential and get 3 AI-powered suggestions.</div>
-        <input class="txt-in" id="ti-in" placeholder="Enter your YouTube video title..." onkeydown="if(event.key==='Enter')runTI()">
-        <input class="txt-in" id="ti-topic" placeholder="Video topic (optional)">
-        <button class="solo-btn" id="ti-btn" onclick="runTI()"><div class="sp"></div><span class="bl">Analyze Title</span></button>
+        <input class="txt-in" id="ti-in" placeholder="Enter your YouTube video title..." onkeydown="if(event.key==='Enter')runTI()" aria-label="YouTube video title to analyze">
+        <input class="txt-in" id="ti-topic" placeholder="Video topic (optional)" aria-label="Video topic (optional)">
+        <button class="solo-btn" id="ti-btn" onclick="runTI()" aria-label="Analyze title CTR"><div class="sp" aria-hidden="true"></div><span class="bl">Analyze Title</span></button>
         <div id="ti-res" style="margin-top:18px"><div class="rbox"><span class="ph">← Enter a title and click Analyze</span></div></div>
       </div>
     </div>
@@ -474,8 +526,8 @@ const I18N = {
         <div class="tp-title">Channel Analytics</div>
         <div class="tp-sub">Paste any channel URL to see subscribers, video count, and recent performance. (~15 sec)</div>
         <div class="input-row">
-          <input class="url-in" id="ch-url" placeholder="https://www.youtube.com/@channelname" onkeydown="if(event.key==='Enter')runCH()">
-          <button class="run-btn" id="ch-btn" onclick="runCH()"><div class="sp"></div><span class="bl">Analyze</span></button>
+          <input class="url-in" id="ch-url" placeholder="https://www.youtube.com/@channelname" onkeydown="if(event.key==='Enter')runCH()" aria-label="YouTube channel URL to analyze">
+          <button class="run-btn" id="ch-btn" onclick="runCH()" aria-label="Analyze channel"><div class="sp" aria-hidden="true"></div><span class="bl">Analyze</span></button>
         </div>
         <div id="ch-res"><div class="rbox"><span class="ph">← Paste a channel URL and click Analyze</span></div></div>
       </div>
@@ -486,8 +538,8 @@ const I18N = {
         <div class="tp-title">Subtitle Translator</div>
         <div class="tp-sub">Extract subtitles and translate into any of 30 languages using AI. (~15–20 sec)</div>
         <div class="input-row">
-          <input class="url-in" id="tr-url" placeholder="https://www.youtube.com/watch?v=..." onkeydown="if(event.key==='Enter')runTR()">
-          <button class="run-btn" id="tr-btn" onclick="runTR()"><div class="sp"></div><span class="bl">Translate</span></button>
+          <input class="url-in" id="tr-url" placeholder="https://www.youtube.com/watch?v=..." onkeydown="if(event.key==='Enter')runTR()" aria-label="YouTube video URL for subtitle translation">
+          <button class="run-btn" id="tr-btn" onclick="runTR()" aria-label="Translate subtitles"><div class="sp" aria-hidden="true"></div><span class="bl">Translate</span></button>
         </div>
         <div style="margin-bottom:14px">
           <div style="font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-bottom:8px">Source language (video subtitles)</div>
@@ -511,8 +563,8 @@ const I18N = {
         <div class="tp-title">Chapter Generator</div>
         <div class="tp-sub">AI analyzes the full transcript and generates YouTube chapter timestamps. Paste directly into your video description. (~15 sec)</div>
         <div class="input-row">
-          <input class="url-in" id="c2-url" placeholder="https://www.youtube.com/watch?v=..." onkeydown="if(event.key==='Enter')runC2()">
-          <button class="run-btn" id="c2-btn" onclick="runC2()"><div class="sp"></div><span class="bl">Generate</span></button>
+          <input class="url-in" id="c2-url" placeholder="https://www.youtube.com/watch?v=..." onkeydown="if(event.key==='Enter')runC2()" aria-label="YouTube video URL for chapter generation">
+          <button class="run-btn" id="c2-btn" onclick="runC2()" aria-label="Generate chapters"><div class="sp" aria-hidden="true"></div><span class="bl">Generate</span></button>
         </div>
         <div class="lchips">
           <button class="lchip active" onclick="setLC(this,'en','c2')">English subtitles</button>
@@ -526,7 +578,9 @@ const I18N = {
   </div>
 </section>
 
+<!-- AdSense: uncomment when approved
 <div class="ad-wrap"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXXX" data-ad-slot="3333333333" data-ad-format="auto"></ins></div>
+-->
 
 <section class="section" id="how">
   <div class="s-eye reveal"><div class="s-eye-line"></div><span data-i18n="s.how">How it works</span></div>
@@ -547,6 +601,7 @@ const I18N = {
     <div class="st-cell"><span class="st-big">$0</span><span class="st-lbl">Forever</span></div>
   </div>
 </div>
+</main>
 
 <footer>
   <div class="ft-top">
@@ -610,7 +665,7 @@ function applyLang(lang){
   uiLang=lang; localStorage.setItem('uiLang',lang);
 }
 function setUILang(lang){applyLang(lang);document.getElementById('lsw-drop').classList.remove('open');}
-function toggleDD(){document.getElementById('lsw-drop').classList.toggle('open');}
+function toggleDD(){const d=document.getElementById('lsw-drop');d.classList.toggle('open');document.querySelector('.lsw-btn').setAttribute('aria-expanded',d.classList.contains('open'));}
 document.addEventListener('click',e=>{if(!e.target.closest('.lsw'))document.getElementById('lsw-drop').classList.remove('open');});
 applyLang(uiLang);
 
@@ -655,7 +710,7 @@ async function runT(){
     tCache={d,url,lang};
     document.getElementById('t-res').innerHTML=d.entries.map(e=>`<div><span class="ts">[${e.timestamp}]</span>${esc(e.text)}</div>`).join('');
     ['t-copy','t-txt','t-srt','t-vtt'].forEach(id=>document.getElementById(id).disabled=false);
-  }catch{document.getElementById('t-res').innerHTML='<span class="err">Cannot connect to backend. Check Railway is running.</span>';}
+  }catch{document.getElementById('t-res').innerHTML='<span class="err">Service temporarily unavailable. Please try again in a moment.</span>';}
   finally{ld('t-btn',false);}
 }
 async function dlT(fmt){
@@ -686,7 +741,7 @@ async function runS(){
       <div class="ai-card"><div class="ai-card-title">Summary</div><p>${esc(d.summary)}</p></div>
       <div class="ai-card"><div class="ai-card-title">Key Points</div><ul class="ai-pts">${(d.key_points||[]).map(p=>`<li>${esc(p)}</li>`).join('')}</ul></div>
       <div class="ai-card"><div class="ai-card-title">Keywords</div><div class="kw-list">${(d.keywords||[]).map(k=>`<span class="kw-pill acc">${esc(k)}</span>`).join('')}</div></div>`;
-  }catch{showErr('s-res','Cannot connect to backend.');}
+  }catch{showErr('s-res','Service temporarily unavailable. Please try again in a moment.');}
   finally{ld('s-btn',false);}
 }
 
@@ -705,7 +760,7 @@ async function runTH(){
         <img src="${src}" alt="${k}" loading="lazy" onerror="this.closest('.thumb-card').style.display='none'">
         <div class="thumb-foot"><span>${lbls[k]||k}</span><a href="${src}" download target="_blank" class="thumb-dl">Save ↓</a></div>
       </div>`).join('')}</div>`;
-  }catch{showErr('th-res','Cannot connect to backend.');}
+  }catch{showErr('th-res','Service temporarily unavailable. Please try again in a moment.');}
   finally{ld('th-btn',false);}
 }
 
@@ -735,7 +790,7 @@ async function runTag(){
         <div class="tag-cloud">${(d.long_tail||[]).map(t=>`<span class="tag-pill">${esc(t)}</span>`).join('')}</div></div>
       <div class="tag-sec"><div class="tag-stitle">Hashtags</div>
         <div class="tag-cloud">${(d.hashtags||[]).map(t=>`<span class="tag-pill hash">${esc(t)}</span>`).join('')}</div></div>`;
-  }catch{showErr('tg-res','Cannot connect to backend.');}
+  }catch{showErr('tg-res','Service temporarily unavailable. Please try again in a moment.');}
   finally{ld('tg-btn',false);}
 }
 async function runTagExt(){
@@ -750,7 +805,7 @@ async function runTagExt(){
       <div class="tag-sec"><div class="tag-stitle">${esc(d.title||'')}</div></div>
       <div class="tag-sec"><div class="tag-stitle">Tags (${(d.tags||[]).length})</div>
         <div class="tag-cloud">${(d.tags||[]).length?d.tags.map(t=>`<span class="tag-pill" onclick="copyText('${t.replace(/'/g,"\\'")}',this)">${esc(t)}</span>`).join(''):'<span style="color:var(--muted);font-size:.8rem">No tags found on this video</span>'}</div></div>`;
-  }catch{showErr('tg-res','Cannot connect to backend.');}
+  }catch{showErr('tg-res','Service temporarily unavailable. Please try again in a moment.');}
   finally{ld('tg-ext-btn',false);}
 }
 
@@ -780,7 +835,7 @@ async function runTI(){
         ${(d.suggestions||[]).map(s=>`<div class="sug-card" onclick="copyText('${s.title.replace(/'/g,"\\'")}',this)"><div class="sug-title">${esc(s.title)}</div><div class="sug-reason">${esc(s.reason)}</div></div>`).join('')}
       </div>
       <div class="ai-card"><div class="ai-card-title">CTR Tips</div><ul class="ai-pts">${(d.tips||[]).map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>`;
-  }catch{showErr('ti-res','Cannot connect to backend.');}
+  }catch{showErr('ti-res','Service temporarily unavailable. Please try again in a moment.');}
   finally{ld('ti-btn',false);}
 }
 
@@ -812,7 +867,7 @@ async function runCH(){
             <div class="vid-meta">${fmt(v.view_count)} views</div>
           </div>
         </div>`).join('')}</div>`;
-  }catch{showErr('ch-res','Cannot connect to backend.');}
+  }catch{showErr('ch-res','Service temporarily unavailable. Please try again in a moment.');}
   finally{ld('ch-btn',false);}
 }
 
@@ -840,7 +895,7 @@ async function runTR(){
             <div class="tr-row"><div class="tr-orig">${esc(e.original)}</div><div class="tr-tgt">${esc(e.translated)}</div></div>
           </div>`).join('')}
       </div>`;
-  }catch{showErr('tr-res','Cannot connect to backend.');}
+  }catch{showErr('tr-res','Service temporarily unavailable. Please try again in a moment.');}
   finally{ld('tr-btn',false);}
 }
 
@@ -874,7 +929,7 @@ async function runC2(){
         <div style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Paste into YouTube description</div>
         <textarea class="yt-textarea" readonly onclick="this.select()">${esc(ytChapters)}</textarea>
       </div>`;
-  }catch{showErr('c2-res','Cannot connect to backend.');}
+  }catch{showErr('c2-res','Service temporarily unavailable. Please try again in a moment.');}
   finally{ld('c2-btn',false);}
 }
 function copyYT(btn){
