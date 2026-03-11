@@ -64,7 +64,7 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type": "Question", "name": "Is UCreatorKit free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, all 8 tools are completely free with no registration, subscription, or hidden costs."}},
+    {"@type": "Question", "name": "Is UCreatorKit free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, all 8 core tools are free to use with no registration required. Some premium features may be introduced in the future."}},
     {"@type": "Question", "name": "Do I need to create an account?", "acceptedAnswer": {"@type": "Answer", "text": "No account is needed. Just paste a YouTube URL and start using any tool immediately."}},
     {"@type": "Question", "name": "How many languages are supported?", "acceptedAnswer": {"@type": "Answer", "text": "UCreatorKit supports 30 languages for subtitle extraction and translation, including English, Korean, Japanese, Chinese, Spanish, French, German, and more."}},
     {"@type": "Question", "name": "What subtitle formats can I download?", "acceptedAnswer": {"@type": "Answer", "text": "You can download subtitles in TXT (plain text), SRT (SubRip), and VTT (WebVTT) formats."}},
@@ -309,28 +309,28 @@ const LANGS = [
 ];
 
 const I18N = {
-  en:{'nav.tools':'Tools','nav.workshop':'Workshop','nav.how':'How it works','nav.cta':'Try Free →','hero.eye':'All-in-one YouTube Creator Toolkit','s.tools':'All Tools','s.ws':'Try It Now','s.how':'How it works','tab.t':'📝 Subtitles','tab.s':'🤖 AI Summary','tab.th':'🖼 Thumbnail','tab.tg':'🏷 Tags','tab.ti':'📈 Title CTR','tab.ch':'📊 Channel','tab.tr':'🌍 Translate (30)','tab.c2':'📋 Chapters','flag':'🇺🇸','label':'EN',
+  en:{'nav.tools':'Tools','nav.workshop':'Workshop','nav.how':'How it works','nav.blog':'Blog','nav.cta':'Try Free →','hero.eye':'All-in-one YouTube Creator Toolkit','s.tools':'All Tools','s.ws':'Try It Now','s.how':'How it works','tab.t':'📝 Subtitles','tab.s':'🤖 AI Summary','tab.th':'🖼 Thumbnail','tab.tg':'🏷 Tags','tab.ti':'📈 Title CTR','tab.ch':'📊 Channel','tab.tr':'🌍 Translate (30)','tab.c2':'📋 Chapters','flag':'🇺🇸','label':'EN',
     'tp.t':'Subtitle Extractor','tp.t.sub':'Paste a YouTube URL, pick language, and extract subtitles instantly.','tp.t.btn':'Extract','tp.t.ph':'← Paste a URL and click Extract','tp.s':'AI Video Summary','tp.s.sub':'AI reads the transcript and extracts the core summary, key points, and keywords. (~10 sec)','tp.s.btn':'Summarize','tp.s.ph':'← Paste a URL and click Summarize','tp.th':'Thumbnail Downloader','tp.th.sub':'Preview and download thumbnails in all available resolutions.','tp.th.btn':'Load','tp.th.ph':'← Paste a URL and click Load',
     'l.en':'English','l.ko':'Korean','l.ja':'Japanese','l.zh':'Chinese','l.es':'Spanish','l.fr':'French','l.de':'German','l.ar':'Arabic','btn.copy':'📋 Copy','btn.txt':'⬇ TXT','btn.srt':'⬇ SRT','btn.vtt':'⬇ VTT'},
-  ko:{'nav.tools':'도구','nav.workshop':'워크샵','nav.how':'사용법','nav.cta':'무료 시작 →','hero.eye':'유튜브 크리에이터 올인원 8종 도구','s.tools':'전체 도구','s.ws':'직접 써보기','s.how':'사용 방법','tab.t':'📝 자막 추출','tab.s':'🤖 AI 요약','tab.th':'🖼 썸네일','tab.tg':'🏷 태그','tab.ti':'📈 제목 분석','tab.ch':'📊 채널','tab.tr':'🌍 번역 (30개국)','tab.c2':'📋 챕터 생성','flag':'🇰🇷','label':'KO',
+  ko:{'nav.tools':'도구','nav.workshop':'워크샵','nav.how':'사용법','nav.blog':'블로그','nav.cta':'무료 시작 →','hero.eye':'유튜브 크리에이터 올인원 8종 도구','s.tools':'전체 도구','s.ws':'직접 써보기','s.how':'사용 방법','tab.t':'📝 자막 추출','tab.s':'🤖 AI 요약','tab.th':'🖼 썸네일','tab.tg':'🏷 태그','tab.ti':'📈 제목 분석','tab.ch':'📊 채널','tab.tr':'🌍 번역 (30개국)','tab.c2':'📋 챕터 생성','flag':'🇰🇷','label':'KO',
     'tp.t':'자막 추출기','tp.t.sub':'YouTube URL을 붙여넣고 언어를 선택하면 즉시 자막이 추출됩니다.','tp.t.btn':'발췌','tp.t.ph':'← URL을 붙여넣고 발췌를 클릭하세요','tp.s':'AI 영상 요약','tp.s.sub':'AI가 자막을 읽고 핵심 요약, 주요 포인트, 키워드를 추출합니다. (~10초)','tp.s.btn':'요약','tp.s.ph':'← URL을 붙여넣고 요약을 클릭하세요','tp.th':'썸네일 다운로더','tp.th.sub':'모든 해상도의 썸네일을 미리보기하고 다운로드하세요.','tp.th.btn':'로드','tp.th.ph':'← URL을 붙여넣고 로드를 클릭하세요',
     'l.en':'영어','l.ko':'한국어','l.ja':'일본어','l.zh':'중국어','l.es':'스페인어','l.fr':'프랑스어','l.de':'독일어','l.ar':'아랍어','btn.copy':'📋 복사','btn.txt':'⬇ TXT','btn.srt':'⬇ SRT','btn.vtt':'⬇ VTT'},
-  ja:{'nav.tools':'ツール','nav.workshop':'ワーク','nav.how':'使い方','nav.cta':'無料で始める →','hero.eye':'YouTubeクリエイター向けオールインワンツール','s.tools':'全ツール','s.ws':'今すぐ試す','s.how':'使い方','tab.t':'📝 字幕','tab.s':'🤖 AI要約','tab.th':'🖼 サムネイル','tab.tg':'🏷 タグ','tab.ti':'📈 タイトル','tab.ch':'📊 チャンネル','tab.tr':'🌍 翻訳(30言語)','tab.c2':'📋 チャプター','flag':'🇯🇵','label':'JA',
+  ja:{'nav.tools':'ツール','nav.workshop':'ワーク','nav.how':'使い方','nav.blog':'ブログ','nav.cta':'無料で始める →','hero.eye':'YouTubeクリエイター向けオールインワンツール','s.tools':'全ツール','s.ws':'今すぐ試す','s.how':'使い方','tab.t':'📝 字幕','tab.s':'🤖 AI要約','tab.th':'🖼 サムネイル','tab.tg':'🏷 タグ','tab.ti':'📈 タイトル','tab.ch':'📊 チャンネル','tab.tr':'🌍 翻訳(30言語)','tab.c2':'📋 チャプター','flag':'🇯🇵','label':'JA',
     'tp.t':'字幕抽出','tp.t.sub':'YouTube URLを貼り付けて言語を選択すると、すぐに字幕が抽出されます。','tp.t.btn':'抽出','tp.t.ph':'← URLを貼り付けて抽出をクリック','tp.s':'AI動画要約','tp.s.sub':'AIがトランスクリプトを読み、要約・キーポイント・キーワードを抽出します。(約10秒)','tp.s.btn':'要約','tp.s.ph':'← URLを貼り付けて要約をクリック','tp.th':'サムネイルダウンロード','tp.th.sub':'全解像度のサムネイルをプレビュー＆ダウンロード。','tp.th.btn':'読込','tp.th.ph':'← URLを貼り付けて読込をクリック',
     'l.en':'英語','l.ko':'韓国語','l.ja':'日本語','l.zh':'中国語','l.es':'スペイン語','l.fr':'フランス語','l.de':'ドイツ語','l.ar':'アラビア語','btn.copy':'📋 コピー','btn.txt':'⬇ TXT','btn.srt':'⬇ SRT','btn.vtt':'⬇ VTT'},
-  es:{'nav.tools':'Herramientas','nav.workshop':'Taller','nav.how':'Cómo funciona','nav.cta':'Probar gratis →','hero.eye':'Kit todo en uno para creadores de YouTube','s.tools':'Herramientas','s.ws':'Pruébalo','s.how':'Cómo funciona','tab.t':'📝 Subtítulos','tab.s':'🤖 Resumen IA','tab.th':'🖼 Miniatura','tab.tg':'🏷 Etiquetas','tab.ti':'📈 CTR Título','tab.ch':'📊 Canal','tab.tr':'🌍 Traducir (30)','tab.c2':'📋 Capítulos','flag':'🇪🇸','label':'ES',
+  es:{'nav.tools':'Herramientas','nav.workshop':'Taller','nav.how':'Cómo funciona','nav.blog':'Blog','nav.cta':'Probar gratis →','hero.eye':'Kit todo en uno para creadores de YouTube','s.tools':'Herramientas','s.ws':'Pruébalo','s.how':'Cómo funciona','tab.t':'📝 Subtítulos','tab.s':'🤖 Resumen IA','tab.th':'🖼 Miniatura','tab.tg':'🏷 Etiquetas','tab.ti':'📈 CTR Título','tab.ch':'📊 Canal','tab.tr':'🌍 Traducir (30)','tab.c2':'📋 Capítulos','flag':'🇪🇸','label':'ES',
     'tp.t':'Extractor de Subtítulos','tp.t.sub':'Pega una URL de YouTube, elige el idioma y extrae los subtítulos al instante.','tp.t.btn':'Extraer','tp.t.ph':'← Pega una URL y haz clic en Extraer','tp.s':'Resumen IA','tp.s.sub':'La IA lee la transcripción y extrae el resumen, puntos clave y palabras clave. (~10 seg)','tp.s.btn':'Resumir','tp.s.ph':'← Pega una URL y haz clic en Resumir','tp.th':'Descarga de Miniaturas','tp.th.sub':'Vista previa y descarga de miniaturas en todas las resoluciones.','tp.th.btn':'Cargar','tp.th.ph':'← Pega una URL y haz clic en Cargar',
     'l.en':'Inglés','l.ko':'Coreano','l.ja':'Japonés','l.zh':'Chino','l.es':'Español','l.fr':'Francés','l.de':'Alemán','l.ar':'Árabe','btn.copy':'📋 Copiar','btn.txt':'⬇ TXT','btn.srt':'⬇ SRT','btn.vtt':'⬇ VTT'},
-  fr:{'nav.tools':'Outils','nav.workshop':'Atelier','nav.how':'Comment ça marche','nav.cta':'Commencer →','hero.eye':'Suite outils tout-en-un pour YouTubeurs','s.tools':'Tous les outils','s.ws':'Essayer maintenant','s.how':'Comment ça marche','tab.t':'📝 Sous-titres','tab.s':'🤖 Résumé IA','tab.th':'🖼 Miniature','tab.tg':'🏷 Étiquettes','tab.ti':'📈 CTR Titre','tab.ch':'📊 Chaîne','tab.tr':'🌍 Traduire (30)','tab.c2':'📋 Chapitres','flag':'🇫🇷','label':'FR',
+  fr:{'nav.tools':'Outils','nav.workshop':'Atelier','nav.how':'Comment ça marche','nav.blog':'Blog','nav.cta':'Commencer →','hero.eye':'Suite outils tout-en-un pour YouTubeurs','s.tools':'Tous les outils','s.ws':'Essayer maintenant','s.how':'Comment ça marche','tab.t':'📝 Sous-titres','tab.s':'🤖 Résumé IA','tab.th':'🖼 Miniature','tab.tg':'🏷 Étiquettes','tab.ti':'📈 CTR Titre','tab.ch':'📊 Chaîne','tab.tr':'🌍 Traduire (30)','tab.c2':'📋 Chapitres','flag':'🇫🇷','label':'FR',
     'tp.t':'Extracteur de Sous-titres','tp.t.sub':'Collez une URL YouTube, choisissez la langue et extrayez les sous-titres instantanément.','tp.t.btn':'Extraire','tp.t.ph':'← Collez une URL et cliquez sur Extraire','tp.s':'Résumé IA Vidéo','tp.s.sub':'L\'IA lit la transcription et extrait le résumé, les points clés et les mots-clés. (~10 sec)','tp.s.btn':'Résumer','tp.s.ph':'← Collez une URL et cliquez sur Résumer','tp.th':'Télécharger Miniature','tp.th.sub':'Aperçu et téléchargement des miniatures dans toutes les résolutions.','tp.th.btn':'Charger','tp.th.ph':'← Collez une URL et cliquez sur Charger',
     'l.en':'Anglais','l.ko':'Coréen','l.ja':'Japonais','l.zh':'Chinois','l.es':'Espagnol','l.fr':'Français','l.de':'Allemand','l.ar':'Arabe','btn.copy':'📋 Copier','btn.txt':'⬇ TXT','btn.srt':'⬇ SRT','btn.vtt':'⬇ VTT'},
-  'zh-Hans':{'nav.tools':'工具','nav.workshop':'工作室','nav.how':'使用方法','nav.cta':'免费开始 →','hero.eye':'YouTube创作者一体化工具套件','s.tools':'全部工具','s.ws':'立即试用','s.how':'使用方法','tab.t':'📝 字幕提取','tab.s':'🤖 AI摘要','tab.th':'🖼 缩略图','tab.tg':'🏷 标签','tab.ti':'📈 标题CTR','tab.ch':'📊 频道','tab.tr':'🌍 翻译(30语)','tab.c2':'📋 章节','flag':'🇨🇳','label':'ZH',
+  'zh-Hans':{'nav.tools':'工具','nav.workshop':'工作室','nav.how':'使用方法','nav.blog':'博客','nav.cta':'免费开始 →','hero.eye':'YouTube创作者一体化工具套件','s.tools':'全部工具','s.ws':'立即试用','s.how':'使用方法','tab.t':'📝 字幕提取','tab.s':'🤖 AI摘要','tab.th':'🖼 缩略图','tab.tg':'🏷 标签','tab.ti':'📈 标题CTR','tab.ch':'📊 频道','tab.tr':'🌍 翻译(30语)','tab.c2':'📋 章节','flag':'🇨🇳','label':'ZH',
     'tp.t':'字幕提取器','tp.t.sub':'粘贴YouTube网址，选择语言，即可提取字幕。','tp.t.btn':'提取','tp.t.ph':'← 粘贴网址并点击提取','tp.s':'AI视频摘要','tp.s.sub':'AI读取字幕，提取核心摘要、关键点和关键词。(约10秒)','tp.s.btn':'摘要','tp.s.ph':'← 粘贴网址并点击摘要','tp.th':'缩略图下载','tp.th.sub':'预览并下载所有分辨率的缩略图。','tp.th.btn':'加载','tp.th.ph':'← 粘贴网址并点击加载',
     'l.en':'英语','l.ko':'韩语','l.ja':'日语','l.zh':'中文','l.es':'西班牙语','l.fr':'法语','l.de':'德语','l.ar':'阿拉伯语','btn.copy':'📋 复制','btn.txt':'⬇ TXT','btn.srt':'⬇ SRT','btn.vtt':'⬇ VTT'},
-  de:{'nav.tools':'Tools','nav.workshop':'Werkstatt','nav.how':'So funktionierts','nav.cta':'Kostenlos →','hero.eye':'Alles-in-einem Toolkit für YouTube-Creator','s.tools':'Alle Tools','s.ws':'Jetzt testen','s.how':'So funktioniert es','tab.t':'📝 Untertitel','tab.s':'🤖 KI-Zusammenfassung','tab.th':'🖼 Thumbnail','tab.tg':'🏷 Tags','tab.ti':'📈 Titel-CTR','tab.ch':'📊 Kanal','tab.tr':'🌍 Übersetzen (30)','tab.c2':'📋 Kapitel','flag':'🇩🇪','label':'DE',
+  de:{'nav.tools':'Tools','nav.workshop':'Werkstatt','nav.how':'So funktionierts','nav.blog':'Blog','nav.cta':'Kostenlos →','hero.eye':'Alles-in-einem Toolkit für YouTube-Creator','s.tools':'Alle Tools','s.ws':'Jetzt testen','s.how':'So funktioniert es','tab.t':'📝 Untertitel','tab.s':'🤖 KI-Zusammenfassung','tab.th':'🖼 Thumbnail','tab.tg':'🏷 Tags','tab.ti':'📈 Titel-CTR','tab.ch':'📊 Kanal','tab.tr':'🌍 Übersetzen (30)','tab.c2':'📋 Kapitel','flag':'🇩🇪','label':'DE',
     'tp.t':'Untertitel-Extraktor','tp.t.sub':'YouTube-URL einfügen, Sprache wählen und Untertitel sofort extrahieren.','tp.t.btn':'Extrahieren','tp.t.ph':'← URL einfügen und Extrahieren klicken','tp.s':'KI-Video-Zusammenfassung','tp.s.sub':'KI liest das Transkript und extrahiert Zusammenfassung, Kernpunkte und Schlüsselwörter. (~10 Sek.)','tp.s.btn':'Zusammenfassen','tp.s.ph':'← URL einfügen und Zusammenfassen klicken','tp.th':'Thumbnail-Download','tp.th.sub':'Thumbnails in allen verfügbaren Auflösungen anzeigen und herunterladen.','tp.th.btn':'Laden','tp.th.ph':'← URL einfügen und Laden klicken',
     'l.en':'Englisch','l.ko':'Koreanisch','l.ja':'Japanisch','l.zh':'Chinesisch','l.es':'Spanisch','l.fr':'Französisch','l.de':'Deutsch','l.ar':'Arabisch','btn.copy':'📋 Kopieren','btn.txt':'⬇ TXT','btn.srt':'⬇ SRT','btn.vtt':'⬇ VTT'},
-  pt:{'nav.tools':'Ferramentas','nav.workshop':'Oficina','nav.how':'Como funciona','nav.cta':'Começar grátis →','hero.eye':'Kit tudo-em-um para criadores do YouTube','s.tools':'Ferramentas','s.ws':'Experimente','s.how':'Como funciona','tab.t':'📝 Legendas','tab.s':'🤖 Resumo IA','tab.th':'🖼 Miniatura','tab.tg':'🏷 Tags','tab.ti':'📈 CTR Título','tab.ch':'📊 Canal','tab.tr':'🌍 Traduzir (30)','tab.c2':'📋 Capítulos','flag':'🇧🇷','label':'PT',
+  pt:{'nav.tools':'Ferramentas','nav.workshop':'Oficina','nav.how':'Como funciona','nav.blog':'Blog','nav.cta':'Começar grátis →','hero.eye':'Kit tudo-em-um para criadores do YouTube','s.tools':'Ferramentas','s.ws':'Experimente','s.how':'Como funciona','tab.t':'📝 Legendas','tab.s':'🤖 Resumo IA','tab.th':'🖼 Miniatura','tab.tg':'🏷 Tags','tab.ti':'📈 CTR Título','tab.ch':'📊 Canal','tab.tr':'🌍 Traduzir (30)','tab.c2':'📋 Capítulos','flag':'🇧🇷','label':'PT',
     'tp.t':'Extrator de Legendas','tp.t.sub':'Cole uma URL do YouTube, escolha o idioma e extraia as legendas instantaneamente.','tp.t.btn':'Extrair','tp.t.ph':'← Cole uma URL e clique em Extrair','tp.s':'Resumo IA de Vídeo','tp.s.sub':'A IA lê a transcrição e extrai o resumo, pontos-chave e palavras-chave. (~10 seg)','tp.s.btn':'Resumir','tp.s.ph':'← Cole uma URL e clique em Resumir','tp.th':'Download de Miniatura','tp.th.sub':'Visualize e baixe miniaturas em todas as resoluções disponíveis.','tp.th.btn':'Carregar','tp.th.ph':'← Cole uma URL e clique em Carregar',
     'l.en':'Inglês','l.ko':'Coreano','l.ja':'Japonês','l.zh':'Chinês','l.es':'Espanhol','l.fr':'Francês','l.de':'Alemão','l.ar':'Árabe','btn.copy':'📋 Copiar','btn.txt':'⬇ TXT','btn.srt':'⬇ SRT','btn.vtt':'⬇ VTT'}
 };
@@ -343,6 +343,7 @@ const I18N = {
     <li><a href="#tools" data-i18n="nav.tools">Tools</a></li>
     <li><a href="#workshop" data-i18n="nav.workshop">Workshop</a></li>
     <li><a href="#how" data-i18n="nav.how">How it works</a></li>
+    <li><a href="/blog.html" data-i18n="nav.blog">Blog</a></li>
   </ul>
   <div class="nav-right">
     <div class="lsw">
@@ -370,7 +371,7 @@ const I18N = {
   <div class="hero-l">
     <div class="eyebrow"><div class="eyebrow-dot"></div><span data-i18n="hero.eye">All-in-one YouTube Creator Toolkit</span></div>
     <h1 class="hero-title">MAKE<br>BETTER<br><span class="outline">CONTENT</span></h1>
-    <p class="hero-desc">Extract subtitles, generate AI summaries, download thumbnails, analyze titles, and <strong>translate to 30 languages</strong>. Every tool a creator needs — completely free.</p>
+    <p class="hero-desc">Extract subtitles, generate AI summaries, download thumbnails, analyze titles, and <strong>translate to 30 languages</strong>. Every tool a creator needs — free to use, no account required.</p>
     <div class="hero-ctas">
       <button class="btn-primary" onclick="goW()">Start for Free →</button>
       <a href="#tools" class="btn-out">Explore Tools</a>
@@ -385,7 +386,7 @@ const I18N = {
       <div class="stat-card"><div class="stat-n">8</div><div class="stat-l">Free Tools</div></div>
       <div class="stat-card"><div class="stat-n">30</div><div class="stat-l">Languages</div></div>
       <div class="stat-card"><div class="stat-n">AI</div><div class="stat-l">Powered</div></div>
-      <div class="stat-card"><div class="stat-n">$0</div><div class="stat-l">Forever</div></div>
+      <div class="stat-card"><div class="stat-n">$0</div><div class="stat-l">No Sign-up</div></div>
     </div>
   </div>
 </section>
@@ -398,7 +399,7 @@ const I18N = {
 
 <section class="section" id="tools">
   <div class="s-eye reveal"><div class="s-eye-line"></div><span data-i18n="s.tools">All Tools</span></div>
-  <h2 class="s-title reveal">8 TOOLS,<br>ALL FREE</h2>
+  <h2 class="s-title reveal">8 TOOLS,<br>ALL YOURS</h2>
   <div class="tools-grid">
     <a href="#workshop" class="tool-card reveal d1" onclick="tab('t')"><div class="tc-idx">01</div><span class="tc-badge br">#1 Popular</span><h3 class="tc-title">Subtitle Extractor</h3><p class="tc-desc">Extract subtitles from any YouTube video in 50+ languages. Download as TXT, SRT, or VTT.</p><div class="tc-arr">Extract Subtitles</div></a>
     <a href="#workshop" class="tool-card reveal d2" onclick="tab('s')"><div class="tc-idx">02</div><span class="tc-badge bg">AI</span><h3 class="tc-title">AI Video Summary</h3><p class="tc-desc">AI analyzes the transcript and extracts the key points, summary, and keywords in seconds.</p><div class="tc-arr">Summarize Video</div></a>
@@ -598,7 +599,7 @@ const I18N = {
     <div class="st-cell"><span class="st-big">8</span><span class="st-lbl">Free Tools</span></div>
     <div class="st-cell"><span class="st-big">30</span><span class="st-lbl">Languages</span></div>
     <div class="st-cell"><span class="st-big">AI</span><span class="st-lbl">Powered</span></div>
-    <div class="st-cell"><span class="st-big">$0</span><span class="st-lbl">Forever</span></div>
+    <div class="st-cell"><span class="st-big">$0</span><span class="st-lbl">No Sign-up</span></div>
   </div>
 </div>
 </main>
@@ -617,6 +618,7 @@ const I18N = {
       <li><a href="#workshop" onclick="tab('c2')">Chapter Generator</a></li>
     </ul></div>
     <div class="ft-links"><h4>Info</h4><ul>
+      <li><a href="/blog.html">Blog</a></li>
       <li><a href="/terms.html">Terms of Service</a></li>
       <li><a href="/privacy.html">Privacy Policy</a></li>
       <li><a href="/about.html">About / Contact</a></li>
@@ -636,7 +638,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 document.getElementById('hero-flags').innerHTML = LANGS.map(l=>`<span title="${l.name}">${l.flag}</span>`).join('');
 
-const mqItems=['Subtitle Extractor','AI Summary','Thumbnail Downloader','Tag Generator','Title Analyzer','Channel Stats','Subtitle Translator','Chapter Generator','30 Languages','100% Free'];
+const mqItems=['Subtitle Extractor','AI Summary','Thumbnail Downloader','Tag Generator','Title Analyzer','Channel Stats','Subtitle Translator','Chapter Generator','30 Languages','No Sign-up Required'];
 const mqHtml = mqItems.map(i=>`<span class="marquee-item">${i}</span>`).join('');
 document.getElementById('mq').innerHTML = mqHtml + mqHtml;
 
